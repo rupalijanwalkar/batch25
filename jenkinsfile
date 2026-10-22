@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('pull') {
             steps {
+                git branch: 'main', url: 'https://github.com/AnjaliDapke10/Fertilizer-Shop-Management-System.git'
                 echo "pull successfull"
             }
         }
