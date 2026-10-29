@@ -16,11 +16,20 @@ pipeline {
                 echo "Building successfull "
             }
         }
-        stage('Test') {
-            steps {
-                echo "Testing sussessfull"
-            }
-        }
+       
+stage('Test') {
+    steps {
+        sh '''
+            /opt/apache-maven-3.10.0/bin/mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+              -Dsonar.projectKey=myproject \
+              -Dsonar.projectName=myproject \
+              -Dsonar.host.url=http://16.4.41.39:9000 \
+              -Dsonar.token="$SONAR_TOKEN"
+        '''
+        echo "Testing successful"
+    }
+}
+
         stage('Deploy') {
             steps {
                 echo "Deploying successfull"
